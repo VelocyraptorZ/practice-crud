@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained(
-                table: 'companies',
-                indexName: 'products_company_id',
-            );
             $table->string('name');
-            $table->text('detail');
+            $table->string('email')->unique();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('companies');
     }
 };

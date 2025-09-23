@@ -21,6 +21,7 @@
 <table class="table table-bordered">
     <tr>
         <th>No</th>
+        <th>Company</th>
         <th>Name</th>
         <th>Details</th>
         <th width="280px">Action</th>
@@ -33,6 +34,7 @@
         @foreach ($products as $product)
         <tr>
             <td>{{ $product->id }}</td>
+            <td>{{ $product->company->name }}</td>
             <td>{{ $product->name }}</td>
             <td>{{ $product->detail }}</td>
             <td>

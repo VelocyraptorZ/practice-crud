@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -22,7 +23,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $companies = Company::all();
+        return view('products.create', compact('companies'));
     }
 
     /**
@@ -31,11 +33,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'company_id' => 'required|exists:companies,id',
             'name' => 'required',
             'detail' => 'required',
         ]);
 
-        Product::create($request->all());
+        Product::create([
+            'company_id' => $request->company_id,
+            'name' => $request->name,
+            'detail' => $request->detail,
+        ]);
 
         return redirect()->route('products.index')
             ->with('success', 'Product created successfully.');

@@ -1,11 +1,10 @@
-@extends('products.layout')
-
+@extends('companies.layout')
 @section('content')
 <div class="row">
-    <div class="col-lg-12 margin-tb mb-2">
+    <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Product</h2>
-        </div>
+            <h2>Add New Company</h2>
+        </div>     
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('products.index') }}">Back</a>
         </div>
@@ -23,21 +22,10 @@
     </div>
 @endif
 
-<form action="{{ route('products.store') }}" method="POST">
-    @csrf
+<form action="{{ route('companies.store') }}" method="POST">
+    @csrf {{-- This is a security token that Laravel uses to protect your application from cross-site request forgery (CSRF) attacks. --}}
 
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Company:</strong>
-                <select name="company_id" class="form-control">
-                    <option value="">Select Company</option>
-                    @foreach ($companies as $company)
-                        <option value="{{ $company->id }}">{{ $company->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name:</strong>
@@ -46,8 +34,14 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Detail:</strong>
-                <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
+                <strong>Email:</strong>
+                <input type="email" name="email" class="form-control" placeholder="Email">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Address:</strong>
+                <textarea class="form-control" style="height:150px" name="address" placeholder="Address"></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
